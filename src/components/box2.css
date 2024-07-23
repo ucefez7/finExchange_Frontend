@@ -1,0 +1,51 @@
+.home-section {
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: var(--dl-space-space-twounits) 20px;
+    gap: var(--dl-space-space-oneandhalfunits);
+    width: 40%; /* Decrease the width of the div */
+  
+    display: flex;
+    z-index: 200;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .home-title {
+    color: black;
+    margin-bottom: 10px;
+  }
+  
+  .home-caption {
+    margin-bottom: 20px;
+  }
+  
+  .home-buttons {
+    display: flex;
+    flex-direction: column; /* Arrange buttons vertically */
+    gap: 10px; /* Add space between buttons */
+  }
+  
+  .home-u2c-btn,
+  .home-c2u-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #007bff; /* Set button color to blue */
+    cursor: pointer;
+    text-align: center;
+    color: white; /* Ensure text is readable */
+  }
+  
+  .home-u2c-btn:hover,
+  .home-c2u-btn:hover {
+    background-color: #0056b3; /* Darken button color on hover */
+  }
+  
+  .home-caption1,
+  .home-caption2 {
+    font-weight: bold;
+    color: white;
+  }
+  

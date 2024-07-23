@@ -1,0 +1,266 @@
+.login-container {
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.navbar-navbar {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.navbar-desktop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-branding img {
+  height: 40px;
+}
+
+.navbar-quick-actions a {
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.navbar-sign-up-btn {
+  font-weight:normal;
+}
+
+.login-main {
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 20px auto;
+  padding: 20px;
+  padding-bottom: 30px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.login-form-container h2 {
+  margin-bottom: 30px;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+}
+
+.login-input-group {
+  position: relative;
+}
+
+.login-input-txt {
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.phone-input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: -10px;
+}
+
+.phone-input-wrapper .phone-input {
+  width: 100%;
+  padding: 10px;
+  padding-left: 50px; /* Ensure space for the box */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border 0.3s ease; /* Smooth border transition */
+}
+
+.phone-input-wrapper .phone-input-icon {
+  position: absolute;
+  right: 10px; /* Adjust the position to your liking */
+  pointer-events: none;
+}
+
+.phone-input-wrapper:focus-within .phone-input {
+  border-color: #000;
+}
+
+.login-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.login-btn:hover{
+  background-color: rgba(127, 125, 125, 0.85);
+  color: white;
+}
+
+
+.divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  margin: 20px 0;
+  position: relative;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 2px;
+}
+
+.divider::before {
+  content: 'or';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 0 10px;
+  color: #888;
+}
+
+.login-options button {
+  margin-left: 56px;
+  margin-top: -12px;
+  width: 68.5%;
+  padding: 10px;
+  font-size: 16px;
+  color: #000;
+  background-color: #e1e1e1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 540;
+}
+
+.login-options button img {
+  margin-right: 10px;
+}
+
+.login-forgot-password {
+  padding-left: 35%;
+  align-items: center;
+  color: blue;
+  text-decoration: none;
+}
+
+
+
+
+.modal {
+  width: 300px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Add this style for OTP input handling */
+.otp-form .otp-input {
+  width: 40px; 
+  margin-left: 5.3%;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.otp-form .otp-input:last-child {
+  margin-right: 0;
+}
+
+.otp-header {
+  margin-bottom: 15px;
+}
+.otp-timer {
+  margin-top: 15px;
+  text-align: center;
+}
+.change-mobile-number {
+  margin-bottom: 15px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #000;
+  font-size: small;
+}
+
+
+
+
+.home-video,
+.home-get-started1 {
+  display: none;
+}
+
+.home-content02,
+.home-content10 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-video1 {
+  display: none;
+}
+
+.home-text,
+.home-text01,
+.home-text02,
+.home-text03,
+.home-text77,
+.home-text78 {
+  display: none;
+}
+
+.home-heading14,
+.home-hero-buttons1,
+.home-ios-btn1,
+.home-android-btn1 {
+  display: none;
+}
+
+
+/* Google icon on btn */
+.google-login .google-icon,
+.apple-login .apple-icon,
+.email-login .email-icon {
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+.apple-icon {
+  font-size: 1.2em; 
+}

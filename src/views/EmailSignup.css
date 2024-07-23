@@ -1,0 +1,139 @@
+.email-signup-container {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.home-notification {
+    margin-bottom: 1rem;
+}
+
+.navbar-navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-desktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.navbar-branding {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-finbest {
+    height: 40px;
+}
+
+.navbar-quick-actions .navbar-sign-up-btn {
+    padding: 0.5rem 1rem;
+    min-width: 110px;
+    background-color: #ADE2DF;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5rem;
+}
+
+.email-signup-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    min-height: 60vh;
+}
+
+.email-signup-form-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.email-signup-form-container h1 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.email-signup-form-container p {
+    margin-bottom: 2rem;
+    color: #888;
+    margin-bottom: 14%;
+    margin-top: 5%;
+}
+
+.email-signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.email-input-group {
+    margin-bottom: 1.5rem;
+}
+
+.email-input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+}
+
+.email-input-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.email-input-group input:focus {
+    border-color: #007bff; /* Adjust the color as needed */
+    border-width: 2px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.eback-btn, .enext-btn {
+    margin-top: 39.8%;
+    padding: 0.5rem 1rem;
+    border: none;
+    height: 45px;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eback-btn {
+    background-color: #e0e0e0;
+    color: #000;
+    padding-left: 8px;
+}
+
+.enext-btn {
+    background-color: #000;
+    color: #fff;
+    padding-right: 8px;
+}
+
+.arrow-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
+}

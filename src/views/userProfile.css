@@ -1,0 +1,201 @@
+/* UserProfile.css */
+
+/* Common Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+  }
+  
+  .profile-page {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 280px;
+    background-color: black;
+    color: #ecf0f1;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .sidebar-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .logo {
+    width: 150px;
+    cursor: pointer;
+  }
+  
+  .sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-nav ul li {
+    padding: 15px 0;
+    border-bottom: 1px solid #34495e;
+    cursor: pointer;
+  }
+  
+  .sidebar-nav ul li:hover {
+    background-color: #252525;
+    border-radius: 5px;
+  }
+  
+  .profile-main {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-section {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .profile-card,
+  .profile-form {
+    background-color: #375EE0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    width: 45%;
+  }
+  
+  .profile-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .profile-details {
+    flex: 1;
+  }
+  
+  .profile-name {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .profile-email {
+    font-size: 16px;
+    color: #fff;
+  }
+  
+  .email-icon {
+    margin-right: 8px;
+    font-size: 1em;
+  }
+  
+  .upi-section,
+  .referral-section {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .upi-section h3,
+  .referral-section h2 {
+    color: white;
+    margin-bottom: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    color: white;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #2c3e50;
+  }
+  
+  .referral-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .referral-code-container,
+  .apply-referral-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .referral-code-container input {
+    width: calc(100% - 100px);
+    margin-right: 10px;
+  }
+  
+  .apply-referral-container input {
+    width: calc(100% - 100px);
+    margin-right: 10px;
+  }
+  
+  .update-button,
+  .copy-button,
+  .apply-button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 0.01em solid #fff;
+  }
+  
+  .update-button:hover,
+  .copy-button:hover,
+  .apply-button:hover {
+    /* background-color: #222; */
+    border: 0.01em solid #000;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+
+.location-icon, .request-icon, .msg-icon, .u2c-icon, .c2u-icon, .profile-icon,.settings-icon, .hom-icon{
+    margin-left: 3px;
+    margin-right: 9px;
+    font-size: 1.25rem;
+}
+
+.seticon{
+    margin-top: 190px;
+}
+
+.profile-img{
+  border-radius: 50%;
+  margin-left: 3px;
+  margin-right: 9px;
+}
