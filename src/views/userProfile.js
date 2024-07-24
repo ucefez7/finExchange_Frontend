@@ -10,6 +10,13 @@ const UserProfile = () => {
   const goToHome = () => {
     history.push('/');
   };
+  const goToChats = () => {
+    history.push('/chats');
+  };
+  const goToProfile = () => {
+    history.push('/user-profile');
+  };
+
 
   const [user, setUser] = useState({
     profilePic: "/WhatsApp Image 2023-08-21 at 1.12.10 PM.jpeg",
@@ -50,11 +57,11 @@ const UserProfile = () => {
             <li onClick={goToHome}><FontAwesomeIcon icon={faHouse} className="hom-icon" /> Home</li>
             <li><FontAwesomeIcon icon={faLocationCrosshairs} className="location-icon" /> Set Location</li>
             <li><FontAwesomeIcon icon={faLocationArrow} className="request-icon"/> My Requests</li>
-            <li><FontAwesomeIcon icon={faMessage} className="msg-icon" /> Messages</li>
+            <li onClick={goToChats}><FontAwesomeIcon icon={faMessage} className="msg-icon" /> Messages</li>
             <li><FontAwesomeIcon icon={faSackDollar} className="u2c-icon"/> Incoming U2C</li>
             <li><FontAwesomeIcon icon={faMoneyCheckDollar} className="c2u-icon" /> Incoming C2U</li>
             {/* <li><FontAwesomeIcon icon={faUser} className="profile-icon"/> User Profile</li> */}
-            <li style={{ display: 'flex', alignItems: 'center' }}>
+            <li onClick={goToProfile} style={{ display: 'flex', alignItems: 'center' }}>
         <img src={user.profilePic} className='profile-img' style={{width: '25px', height: '25px', marginRight: '8px'}} alt="Profile"/>
         User Profile</li>
             </ul><ul><div className='seticon'>

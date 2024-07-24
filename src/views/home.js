@@ -160,8 +160,8 @@ const Home = (props) => {
 
 
 
-<div className="home-content">
-  <div className="home-content-main" id="freeTest">
+<div className="home-content" id="freeTest">
+  <div className="home-content-main">
     <h1 className="home-title">
     FinExchange, where cash exchanges are made simple.
     </h1>
