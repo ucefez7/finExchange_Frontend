@@ -30,7 +30,7 @@ const EmailSignup = () => {
           />
         </Link>
       </div>
-      <header className="navbar-navbar">
+      <header className="navbar-navbar" style={{border:'0.001rem solid white'}}>
         <div className="navbar-desktop">
           <div className="navbar-main">
             <div className="navbar-branding">

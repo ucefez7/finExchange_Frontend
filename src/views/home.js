@@ -294,7 +294,7 @@ const Home = (props) => {
 
 {isModalOpen && (
       <div className="modal-overlay">
-        <div className="modal">
+        <div className="modal1">
           <div className="modal-header">
             <button
               className={`modal-switch-btn ${
@@ -392,7 +392,7 @@ const Home = (props) => {
 
 {isConfirmationModalOpen && (
         <div className="modal-overlay">
-          <div className="modal">
+          <div className="modal2">
             <div className="modal-header">
               <h2>Enter Confirmation Code</h2>
               <button className="modal-close-btn" onClick={closeConfirmationModal}>×</button>

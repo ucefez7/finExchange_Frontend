@@ -1,10 +1,10 @@
 .navbar-navbar {
-  background: white;
+  background-color: #000;
+  border: 0.001rem solid gray;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   margin: 20px auto;
   max-width: 1200px;
-  /* min-width: 1320px; */
   min-width: 1320px;
   width: 100%;
   display: flex;
@@ -48,7 +48,8 @@
   text-decoration: none;
 }
 .navbar-links {
-  color: rgb(132, 131, 131);
+  /* color: rgb(132, 131, 131); */
+  color: #ffffff;
   font-weight:500;
   gap: var(--dl-space-space-threeunits);
   display: flex;
@@ -275,7 +276,8 @@
 
 .navbar-user-name {
   /* color: rgb(132, 131, 131); */
-  color: black;
+  /* color: black; */
+  color: white;
   font-weight:500;
 }
 

@@ -18,15 +18,17 @@ const Navbar = () => {
   };
 
   return (
-    <header className="navbar-navbar">
+    <header className="navbar-navbar" style={{backgroundColor:'#000'}}>
       <div className="navbar-desktop">
         <div className="navbar-main">
           <div className="navbar-branding">
             <Link to="/" className="navbar-navlink">
               <img
                 alt="Cash Exchange Logo"
-                src="/finExchange.png"
+                // src="/finExchange.png"
+                src='/finExchangeBW.png'
                 className="navbar-finbest"
+                style={{height:'50px'}}
               />
             </Link>
           </div>
