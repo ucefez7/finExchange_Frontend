@@ -31,6 +31,19 @@ const Home = (props) => {
   const [confirmationCode, setConfirmationCode] = useState(["", "", "", "", "", ""]);
   const [successMessage, setSuccessMessage] = useState("");
   const [status, setStatus] = useState("noExchange");
+  
+  const [userExists, setUserExists] = useState(false);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserExists(true);
+    }
+    // else {
+    //   setUserExists(false);
+    // }
+  }, []);
+
 
   // Example status and color mapping
   const statusMapping = {
@@ -155,8 +168,7 @@ const Home = (props) => {
               ></Announcement>
             </Link>
           </div>
-          <Navbar/>
-          <Navbar1/>
+          {userExists ? <Navbar1 /> : <Navbar />}
         </header>
 
 
