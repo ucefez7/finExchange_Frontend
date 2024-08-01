@@ -107,7 +107,7 @@
 }
 
 .login-btn:hover{
-  background-color: rgba(127, 125, 125, 0.85);
+  background-color: rgba(23, 22, 22, 0.85);
   color: white;
 }
 
@@ -163,7 +163,7 @@
 
 
 
-.modal {
+/* .modal {
   width: 300px;
   padding: 20px;
   background-color: #fff;
@@ -186,7 +186,7 @@
   align-items: center;
 }
 
-/* Add this style for OTP input handling */
+
 .otp-form .otp-input {
   width: 40px; 
   margin-left: 5.3%;
@@ -215,7 +215,96 @@
   cursor: pointer;
   color: #000;
   font-size: small;
+} */
+
+
+.modal {
+  width: 300px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.otp-header {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.otp-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: center; /* Center the OTP fields horizontally */
+  margin-bottom: 10px;
+}
+
+.otp-input {
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.login-btn:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.otp-timer {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.change-mobile-number {
+  margin-bottom: 15px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #000;
+  font-size: small;
+}
+
+.otp-error {
+  color: red;
+  margin-top: 10px;
+}
+
+
+
 
 
 

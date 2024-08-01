@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom'; // Import useHistory
+import { Link, useHistory } from 'react-router-dom'; 
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import Modal from 'react-modal';
@@ -9,17 +9,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle, faApple } from '@fortawesome/free-brands-svg-icons';
 import Announcement from '../components/announcement';
+import Axios from 'axios';
 
 const Login = () => {
   const [phone, setPhone] = useState('');
-  const [otp, setOtp] = useState(Array(4).fill(''));
+  const [otp, setOtp] = useState(Array(6).fill('')); // Updated to 6 digits
   const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
   const [otpTimer, setOtpTimer] = useState(30);
   const [resendTimer, setResendTimer] = useState(60);
   const [canResend, setCanResend] = useState(false);
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
-
-  const history = useHistory(); // Initialize history
+  const [otpError, setOtpError] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     if (otpTimer > 0) {
@@ -41,13 +42,19 @@ const Login = () => {
     setIsContinueDisabled(otp.some(digit => digit === ''));
   }, [otp]);
 
-  const handleContinueClick = () => {
-    setIsOtpModalOpen(true);
-    setOtpTimer(30);
-    setResendTimer(60);
-    setCanResend(false);
-    // Simulate sending OTP to the user
-    sendOtp();
+
+  const handleContinueClick = async () => {
+    try {
+      const formattedPhoneNumber = phone.startsWith('+') ? phone : `+${phone}`;
+      await Axios.post('http://localhost:8000/mobile', { number: formattedPhoneNumber });
+      setIsOtpModalOpen(true);
+      setOtpTimer(30);
+      setResendTimer(60);
+      setCanResend(false);
+      setOtpError('');
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+    }
   };
 
   const handleOtpChange = (e, index) => {
@@ -65,27 +72,58 @@ const Login = () => {
     }
   };
 
-  const handleOtpSubmit = (e) => {
-    e.preventDefault();
-    // Handle OTP verification logic here
-    setIsOtpModalOpen(false);
-    // Redirect to /email route
-    history.push('/email');
-  };
+  // const handleOtpSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await Axios.post('http://localhost:8000/otp', { otp: otp.join(''), userNumber: phone });
+  //     if (response.data.resp.valid) {
+  //       history.push('/email'); // Redirect on successful OTP verification
+  //     } else {
+  //       setOtpError('Expired or invalid OTP. Please try again.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error verifying OTP:', error);
+  //     setOtpError('An error occurred while verifying OTP.');
+  //   }
+  // };
 
-  const handleResendOtp = () => {
+
+
+
+  const handleOtpSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await Axios.post('http://localhost:8000/otp', { otp: otp.join(''), userNumber: phone });
+      if (response.data.valid) {
+        if (response.data.newUser) {
+          history.push(response.data.redirect); // Redirect to /email for new users
+        } else {
+          history.push(response.data.redirect); // Redirect to / for existing users
+        }
+      } else {
+        setOtpError('Expired or invalid OTP. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      setOtpError('An error occurred while verifying OTP.');
+    }
+  };
+  
+  
+  
+
+  const handleResendOtp = async () => {
     if (canResend) {
       setOtpTimer(30);
       setResendTimer(30);
       setCanResend(false);
-      // Simulate resending OTP to the user
-      sendOtp();
+      setOtpError('');
+      try {
+        await Axios.post('http://localhost:8000/mobile', { number: phone });
+      } catch (error) {
+        console.error('Error resending OTP:', error);
+      }
     }
-  };
-
-  const sendOtp = () => {
-    // Simulate an API call to send OTP
-    console.log('Sending OTP to the phone number:', phone);
   };
 
   return (
@@ -126,7 +164,7 @@ const Login = () => {
                 <PhoneInput
                   country={'in'}
                   value={phone}
-                  onChange={phone => setPhone(phone)}
+                  onChange={setPhone}
                   inputProps={{
                     name: 'phone',
                     required: true,
@@ -170,20 +208,22 @@ const Login = () => {
         </div>
       </main>
 
-      <Modal
-        isOpen={isOtpModalOpen}
-        onRequestClose={() => setIsOtpModalOpen(false)}
-        contentLabel="OTP Verification"
-        className="modal"
-        overlayClassName="modal-overlay"
-      >
-        <div className='otp-header'>
-          <h2>Enter the 4 digit code</h2>
-        </div>
-        <Link to="/login" className="change-mobile-number" onClick={() => setIsOtpModalOpen(false)}>
-          Change your mobile number
-        </Link>
-        <form onSubmit={handleOtpSubmit} className="otp-form">
+
+<Modal
+      isOpen={isOtpModalOpen}
+      onRequestClose={() => setIsOtpModalOpen(false)}
+      contentLabel="OTP Verification"
+      className="modal"
+      overlayClassName="modal-overlay"
+    >
+      <div className="otp-header">
+        <h2>Enter the 6 digit code</h2>
+      </div>
+      <Link to="/login" className="change-mobile-number" onClick={() => setIsOtpModalOpen(false)}>
+        Change your mobile number
+      </Link>
+      <form onSubmit={handleOtpSubmit} className="otp-form">
+        <div className="otp-inputs">
           {otp.map((digit, index) => (
             <input
               key={index}
@@ -195,25 +235,26 @@ const Login = () => {
               className="otp-input"
             />
           ))}
-          <button
-            type="submit"
-            className="login-btn"
-            style={{ backgroundColor: 'black' }}
-            disabled={isContinueDisabled}
-          >
-            Confirm
-          </button>
-        </form>
-        <div className="otp-timer">
-          {resendTimer > 0 ? (
-            <span>Resend code in {resendTimer} seconds</span>
-          ) : (
-            <button onClick={handleResendOtp} disabled={!canResend}>
-              Resend Code by SMS
-            </button>
-          )}
         </div>
-      </Modal>
+        <button
+          type="submit"
+          className="login-btn"
+          disabled={isContinueDisabled}
+        >
+          Confirm
+        </button>
+      </form>
+      {otpError && <div className="otp-error">{otpError}</div>}
+      <div className="otp-timer">
+        {resendTimer > 0 ? (
+          <span>Resend code in {resendTimer} seconds</span>
+        ) : (
+          <button onClick={handleResendOtp} disabled={!canResend}>
+            Resend Code by SMS
+          </button>
+        )}
+      </div>
+    </Modal>
 
       <Footer />
     </div>
