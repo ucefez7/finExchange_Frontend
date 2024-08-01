@@ -42,7 +42,6 @@ const Login = () => {
     setIsContinueDisabled(otp.some(digit => digit === ''));
   }, [otp]);
 
-
   const handleContinueClick = async () => {
     try {
       const formattedPhoneNumber = phone.startsWith('+') ? phone : `+${phone}`;
@@ -72,30 +71,13 @@ const Login = () => {
     }
   };
 
-  // const handleOtpSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await Axios.post('http://localhost:8000/otp', { otp: otp.join(''), userNumber: phone });
-  //     if (response.data.resp.valid) {
-  //       history.push('/email'); // Redirect on successful OTP verification
-  //     } else {
-  //       setOtpError('Expired or invalid OTP. Please try again.');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error verifying OTP:', error);
-  //     setOtpError('An error occurred while verifying OTP.');
-  //   }
-  // };
-
-
-
-
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await Axios.post('http://localhost:8000/otp', { otp: otp.join(''), userNumber: phone });
       if (response.data.valid) {
         if (response.data.newUser) {
+          localStorage.setItem('userId', response.data.userId); // Store userId in localStorage
           history.push(response.data.redirect); // Redirect to /email for new users
         } else {
           history.push(response.data.redirect); // Redirect to / for existing users
@@ -108,9 +90,6 @@ const Login = () => {
       setOtpError('An error occurred while verifying OTP.');
     }
   };
-  
-  
-  
 
   const handleResendOtp = async () => {
     if (canResend) {
@@ -208,53 +187,52 @@ const Login = () => {
         </div>
       </main>
 
-
-<Modal
-      isOpen={isOtpModalOpen}
-      onRequestClose={() => setIsOtpModalOpen(false)}
-      contentLabel="OTP Verification"
-      className="modal"
-      overlayClassName="modal-overlay"
-    >
-      <div className="otp-header">
-        <h2>Enter the 6 digit code</h2>
-      </div>
-      <Link to="/login" className="change-mobile-number" onClick={() => setIsOtpModalOpen(false)}>
-        Change your mobile number
-      </Link>
-      <form onSubmit={handleOtpSubmit} className="otp-form">
-        <div className="otp-inputs">
-          {otp.map((digit, index) => (
-            <input
-              key={index}
-              type="text"
-              maxLength="1"
-              id={`otp-${index}`}
-              value={digit}
-              onChange={(e) => handleOtpChange(e, index)}
-              className="otp-input"
-            />
-          ))}
+      <Modal
+        isOpen={isOtpModalOpen}
+        onRequestClose={() => setIsOtpModalOpen(false)}
+        contentLabel="OTP Verification"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <div className="otp-header">
+          <h2>Enter the 6 digit code</h2>
         </div>
-        <button
-          type="submit"
-          className="login-btn"
-          disabled={isContinueDisabled}
-        >
-          Confirm
-        </button>
-      </form>
-      {otpError && <div className="otp-error">{otpError}</div>}
-      <div className="otp-timer">
-        {resendTimer > 0 ? (
-          <span>Resend code in {resendTimer} seconds</span>
-        ) : (
-          <button onClick={handleResendOtp} disabled={!canResend}>
-            Resend Code by SMS
+        <Link to="/login" className="change-mobile-number" onClick={() => setIsOtpModalOpen(false)}>
+          Change your mobile number
+        </Link>
+        <form onSubmit={handleOtpSubmit} className="otp-form">
+          <div className="otp-inputs">
+            {otp.map((digit, index) => (
+              <input
+                key={index}
+                type="text"
+                maxLength="1"
+                id={`otp-${index}`}
+                value={digit}
+                onChange={(e) => handleOtpChange(e, index)}
+                className="otp-input"
+              />
+            ))}
+          </div>
+          <button
+            type="submit"
+            className="login-btn"
+            disabled={isContinueDisabled}
+          >
+            Confirm
           </button>
-        )}
-      </div>
-    </Modal>
+        </form>
+        {otpError && <div className="otp-error">{otpError}</div>}
+        <div className="otp-timer">
+          {resendTimer > 0 ? (
+            <span>Resend code in {resendTimer} seconds</span>
+          ) : (
+            <button onClick={handleResendOtp} disabled={!canResend}>
+              Resend Code by SMS
+            </button>
+          )}
+        </div>
+      </Modal>
 
       <Footer />
     </div>

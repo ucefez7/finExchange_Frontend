@@ -1,0 +1,124 @@
+.signup-container {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.home-notification {
+    margin-bottom: 1rem;
+}
+
+.navbar-navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-desktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.navbar-branding {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-finbest {
+    height: 40px;
+}
+
+.navbar-quick-actions .navbar-sign-up-btn {
+    padding: 0.5rem 1rem;
+    min-width: 110px;
+    background-color: #ADE2DF;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5rem;
+}
+
+.signup-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    min-height: 60vh;
+}
+
+.signup-form-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.signup-form-container h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.signup-form-container p {
+    margin-bottom: 2rem;
+    color: #888;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.code-input-group {
+    margin-bottom: 1.5rem;
+}
+
+.code-input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+}
+
+.code-input-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.code-input-group input:focus {
+    border-color: #007bff;
+    border-width: 2px;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 1rem;
+}
+
+.button-group1 {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './EmailSignup.css';
 import Axios from 'axios';
@@ -7,27 +7,40 @@ import Announcement from '../components/announcement';
 
 const EmailSignup = () => {
   const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const history = useHistory();
 
-  const handleNext = async () => {
-    if (email.trim() !== '') {
-      try {
-        const phoneNumber = localStorage.getItem('phoneNumber');
-        console.log('PhoneNumber:', phoneNumber, 'Email:', email);
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      history.push('/login');
+    }
+  }, [history]);
 
+  const handleNext = async (e) => {
+    e.preventDefault();
+    if (email.trim() !== '' && userId) {
+      try {
+        setLoading(true);
+        setError('');
         const response = await Axios.post('http://localhost:8000/email', {
-          phoneNumber,
+          userId,
           email,
         });
 
         if (response.status === 200) {
-          console.log('Email updated successfully');
-          history.push('/name');
+          history.push(response.data.redirect);
         } else {
-          console.error('Failed to update email:', response.data.error);
+          setError('Failed to update email.');
         }
       } catch (error) {
-        console.error('Error updating email:', error);
+        setError('Error updating email. Please try again.');
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -63,7 +76,7 @@ const EmailSignup = () => {
         <div className="email-signup-form-container">
           <h1>Enter your email address</h1>
           <p>Add your email to aid in account recovery</p>
-          <form className="email-signup-form">
+          <form className="email-signup-form" onSubmit={handleNext}>
             <div className="email-input-group">
               <label htmlFor="email">Email</label>
               <input
@@ -72,6 +85,7 @@ const EmailSignup = () => {
                 placeholder="Enter Your Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className="button-group">
@@ -93,12 +107,15 @@ const EmailSignup = () => {
                 </svg>
               </button>
               <button
-                type="button"
+                type="submit"
                 className="next-btn"
-                style={{ backgroundColor: email.trim() !== '' ? '#000' : '#e0e0e0', color: email.trim() !== '' ? '#fff' : '#000' }}
-                onClick={handleNext}
+                style={{
+                  backgroundColor: email.trim() !== '' ? '#000' : '#e0e0e0',
+                  color: email.trim() !== '' ? '#fff' : '#000'
+                }}
+                disabled={loading || email.trim() === ''}
               >
-                Next
+                {loading ? 'Processing...' : 'Next'}
                 <svg
                   className="arrrow-icon next-arrow"
                   xmlns="http://www.w3.org/2000/svg"
@@ -116,6 +133,7 @@ const EmailSignup = () => {
                 </svg>
               </button>
             </div>
+            {error && <div className="error-message">{error}</div>}
           </form>
         </div>
       </main>

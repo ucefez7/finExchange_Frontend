@@ -12,6 +12,7 @@ import Signup from './views/NameSignup';
 import EmailSignup from './views/EmailSignup';
 import userProfile from './views/userProfile';
 import Chat from './views/chat';
+import SecurityCode from './views/SecurityCode';
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route component={Login} path="/login" /> 
         <Route component={Signup} path="/name" /> 
         <Route component={EmailSignup} path="/email" />
+        <Route component={SecurityCode} path="/security-code" />
         <Route component={userProfile} path="/user-profile" />
         <Route component={Chat} path="/chats" />
         

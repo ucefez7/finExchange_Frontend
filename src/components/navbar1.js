@@ -4,8 +4,8 @@ import Script from 'dangerous-html/react';
 import './navbar.css';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Navbar1 = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const history = useHistory();
 
   const userProfile = {
@@ -34,16 +34,16 @@ const Navbar = () => {
           </div>
           <div className="navbar-links">
             <Link to="/" className="link1">
-              Features
+            My requests
             </Link>
             <Link to="/" className="link2">
-              How it works
+            Incomming requests
             </Link>
             <Link to="/" className="link3">
-              Set Location
+            Chats
             </Link>
             <Link to="/" className="link4">
-              Contacts
+            Set Location
             </Link>
           </div>
         </div>
@@ -89,21 +89,26 @@ const Navbar = () => {
         </div>
         <div className="navbar-links1">
           <Link to="/" className="navbar-navlink2">
-            Features
+          My requests
           </Link>
           <Link to="/" className="navbar-navlink3">
-            How it works
+          Incomming requests
           </Link>
           <Link to="/" className="navbar-navlink4">
-            Set Location
+          Chats
           </Link>
           <Link to="/" className="navbar-navlink5">
-            User Profile
+          Set Location
           </Link>
           <div className="navbar-buttons">
             <Link to="/" className="navbar-navlink6">
               <div className="navbar-btn">
-                <span className="navbar-text">Get Started</span>
+                <span className="navbar-text">Log in</span>
+              </div>
+            </Link>
+            <Link to="/" className="navbar-navlink7">
+              <div className="navbar-btn1">
+                <span className="navbar-text1">Sign up</span>
               </div>
             </Link>
           </div>
@@ -143,4 +148,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar1;

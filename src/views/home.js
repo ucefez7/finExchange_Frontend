@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { useState, useEffect } from "react";
 
 import Announcement from "../components/announcement";
+import Navbar1 from "../components/navbar1";
 import Navbar from "../components/navbar";
 import Highlight from "../components/highlight";
 import Point from "../components/point";
@@ -154,7 +155,8 @@ const Home = (props) => {
               ></Announcement>
             </Link>
           </div>
-          <Navbar></Navbar>
+          <Navbar/>
+          <Navbar1/>
         </header>
 
 
@@ -182,55 +184,6 @@ const Home = (props) => {
       </div>
     </div>
 
-{/* GooglePay Integration by ucefez*/}
-    {/* <div className="gpay">
-    <GooglePayButton
-  environment='TEST'
-  paymentRequest={{
-    apiVersion: 2,
-    apiVersionMinor: 0,
-    allowedPaymentMethods: [
-      {
-        type: "CARD",
-        parameters: {
-          allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-          allowedCardNetworks: ["MASTERCARD", "VISA"]
-        },
-        tokenizationSpecification: {
-          type: "PAYMENT_GATEWAY",
-          parameters: {
-            gateway: "example", // Added gateway parameter
-            gatewayMerchantId: "exampleGate"
-          }
-        },
-      },
-    ],
-    merchantInfo: {
-      merchantId: "12345678",
-      merchantName: "FinExchange"
-    },
-    transactionInfo: {
-      totalPriceStatus: "FINAL", // Corrected key
-      totalPriceLabel: "Total",
-      totalPrice: "10",
-      currencyCode: "INR", // Use ISO 4217 currency code
-      countryCode: "IN" // Use ISO 3166-1 alpha-2 country code
-    },
-    shippingAddressRequired: true,
-    callbackIntents: ["PAYMENT_AUTHORIZATION"]
-  }}
-  onLoadPaymentData={paymentRequest => {
-    console.log(paymentRequest)
-  }}
-  onPaymentAuthorized={paymentData => {
-    console.log(paymentData);
-    return { transactionState: 'SUCCESS' }
-  }}
-  existingPaymentMethodRequired='false'
-  buttonColor='black'
-  buttonType='buy'
-></GooglePayButton>
-    </div> */}
 
   </div>
 
