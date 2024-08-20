@@ -6,20 +6,21 @@ import Modal from 'react-modal';
 import './login.css';
 import Footer from '../components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle, faApple } from '@fortawesome/free-brands-svg-icons';
 import Announcement from '../components/announcement';
 import Axios from 'axios';
 
 const Login = () => {
   const [phone, setPhone] = useState('');
-  const [otp, setOtp] = useState(Array(6).fill('')); // Updated to 6 digits
+  const [otp, setOtp] = useState(Array(6).fill(''));
   const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
   const [otpTimer, setOtpTimer] = useState(30);
   const [resendTimer, setResendTimer] = useState(60);
   const [canResend, setCanResend] = useState(false);
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [otpError, setOtpError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -43,8 +44,15 @@ const Login = () => {
   }, [otp]);
 
   const handleContinueClick = async () => {
+    if (!phone || phone.length < 10) {
+      console.error('Invalid phone number:', phone);
+      return;
+    }
+
     try {
+      setIsLoading(true);
       const formattedPhoneNumber = phone.startsWith('+') ? phone : `+${phone}`;
+      console.log('Formatted Phone Number:', formattedPhoneNumber); // Debug statement
       await Axios.post('http://localhost:8000/mobile', { number: formattedPhoneNumber });
       setIsOtpModalOpen(true);
       setOtpTimer(30);
@@ -53,16 +61,17 @@ const Login = () => {
       setOtpError('');
     } catch (error) {
       console.error('Error sending OTP:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleOtpChange = (e, index) => {
     const newOtp = [...otp];
-    const value = e.target.value.replace(/\D/, ''); // Only allow digits
+    const value = e.target.value.replace(/\D/, '');
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Auto-focus on next input
     if (value && index < otp.length - 1) {
       const nextInput = document.getElementById(`otp-${index + 1}`);
       if (nextInput) {
@@ -71,16 +80,19 @@ const Login = () => {
     }
   };
 
+  
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await Axios.post('http://localhost:8000/otp', { otp: otp.join(''), userNumber: phone });
       if (response.data.valid) {
+        localStorage.setItem('userId', response.data.userId);
         if (response.data.newUser) {
-          localStorage.setItem('userId', response.data.userId); // Store userId in localStorage
-          history.push(response.data.redirect); // Redirect to /email for new users
+          history.push(response.data.redirect);
         } else {
-          history.push(response.data.redirect); // Redirect to / for existing users
+          history.push(response.data.redirect);
+          // history.push('/');
         }
       } else {
         setOtpError('Expired or invalid OTP. Please try again.');
@@ -88,8 +100,11 @@ const Login = () => {
     } catch (error) {
       console.error('Error verifying OTP:', error);
       setOtpError('An error occurred while verifying OTP.');
+    } finally {
+      setIsLoading(false);
     }
   };
+  
 
   const handleResendOtp = async () => {
     if (canResend) {
@@ -109,10 +124,7 @@ const Login = () => {
     <div className="login-container">
       <div id="notifcation" className="home-notification">
         <Link to="/">
-          <Announcement
-            rootClassName="announcement-root-class-name"
-            className="home-component"
-          ></Announcement>
+          <Announcement rootClassName="announcement-root-class-name" className="home-component"></Announcement>
         </Link>
       </div>
       <header className="navbar-navbar" style={{border:'0.001rem solid white'}}>
@@ -156,11 +168,15 @@ const Login = () => {
             </div>
             <button
               type="button"
-              className="login-btn"
-              style={{ backgroundColor: 'black' }}
+              className={`continue-button ${isLoading ? 'loading' : ''}`} // Apply loading class conditionally
               onClick={handleContinueClick}
+              disabled={isLoading}
             >
-              Continue
+              {isLoading ? (
+                <FontAwesomeIcon icon={faSpinner} spin style={{ color: 'blue', fontSize: '1.5rem' }} />
+              ) : (
+                'Continue'
+              )}
             </button>
           </form>
 
@@ -205,33 +221,32 @@ const Login = () => {
             {otp.map((digit, index) => (
               <input
                 key={index}
-                type="text"
-                maxLength="1"
                 id={`otp-${index}`}
+                type="text"
                 value={digit}
                 onChange={(e) => handleOtpChange(e, index)}
+                maxLength="1"
                 className="otp-input"
+                disabled={isLoading}
               />
             ))}
           </div>
+          {otpError && <p className="otp-error">{otpError}</p>}
           <button
             type="submit"
-            className="login-btn"
-            disabled={isContinueDisabled}
+            className={`confirm-button ${isLoading ? 'loading' : ''}`} // Apply loading class conditionally
+            disabled={isLoading}
           >
-            Confirm
+            {isLoading ? (
+              <FontAwesomeIcon icon={faSpinner} spin style={{ color: 'blue', fontSize: '1.5rem' }} />
+            ) : (
+              'Confirm'
+            )}
+          </button>
+          <button type="button" className="resend-button" onClick={handleResendOtp} disabled={!canResend || isLoading}>
+            {canResend ? 'Resend OTP' : `Resend OTP in ${resendTimer}s`}
           </button>
         </form>
-        {otpError && <div className="otp-error">{otpError}</div>}
-        <div className="otp-timer">
-          {resendTimer > 0 ? (
-            <span>Resend code in {resendTimer} seconds</span>
-          ) : (
-            <button onClick={handleResendOtp} disabled={!canResend}>
-              Resend Code by SMS
-            </button>
-          )}
-        </div>
       </Modal>
 
       <Footer />

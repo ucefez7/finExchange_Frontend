@@ -284,3 +284,86 @@
 .navbar-user-name:hover{
   color: #0056b3;
 }
+
+.navbar-logout-btn{
+  width: 90px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+
+
+/* Overlay for modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Darker overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal box */
+.modal {
+  background-color: #000;
+  border: 0.001rem solid gray;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* Buttons container */
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Common styles for buttons */
+.confirm-logout-btn, .cancel-logout-btn {
+  width: 110px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  margin-left: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+/* Confirm logout button */
+.confirm-logout-btn {
+  width: 110px;
+  align-items: center;
+  /* background-color: #d9534f;
+  color: white; */
+  background-color: red;
+  color: #fff;
+}
+
+.confirm-logout-btn:hover {
+  /* background-color: #c9302c; */
+  background-color: rgb(171, 6, 6);
+  color: #fff;
+}
+
+/* Cancel button */
+.cancel-logout-btn {
+  /* background-color: #5a5a5a;
+  color: white; */
+  background-color: green;
+  color: #fff;
+}
+
+.cancel-logout-btn:hover {
+  /* background-color: #3e3e3e; */
+  background-color: rgb(3, 93, 3);
+  color: #fff;
+}
+

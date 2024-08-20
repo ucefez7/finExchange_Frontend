@@ -93,7 +93,7 @@
   border-color: #000;
 }
 
-.login-btn {
+.login-btn1 {
   margin-top: 20px;
   width: 100%;
   padding: 10px;
@@ -106,9 +106,40 @@
   margin-bottom: 20px;
 }
 
-.login-btn:hover{
-  background-color: rgba(23, 22, 22, 0.85);
+.login-btn1:hover{
+  /* background-color: rgba(23, 22, 22, 0.85); */
+  background-color: rgba(196, 176, 176, 0.85);
   color: white;
+}
+
+
+/* Add styles for the continue button */
+.continue-button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.continue-button:hover {
+  background-color: #333;
+}
+
+.continue-button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+.continue-button.loading {
+  background-color: black;
 }
 
 
@@ -163,59 +194,36 @@
 
 
 
-/* .modal {
-  width: 300px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.otp-form .otp-input {
-  width: 40px; 
-  margin-left: 5.3%;
-  padding: 10px;
-  font-size: 16px;
-  text-align: center;
-  margin-right: 10px;
-  border: 1px solid #ccc;
+/* Add styles for the confirm button */
+.confirm-button {
+  background-color: black;
   border-radius: 5px;
-}
-
-.otp-form .otp-input:last-child {
-  margin-right: 0;
-}
-
-.otp-header {
+  min-width: 130px;
+  color: white;
   margin-bottom: 15px;
-}
-.otp-timer {
-  margin-top: 15px;
-  text-align: center;
-}
-.change-mobile-number {
-  margin-bottom: 15px;
-  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
   cursor: pointer;
-  color: #000;
-  font-size: small;
-} */
+  transition: background-color 0.3s ease;
+}
+
+.confirm-button:hover {
+  background-color: #333; /* Darker shade for hover */
+}
+
+.confirm-button:disabled {
+  background-color: #666; /* Gray for disabled state */
+  cursor: not-allowed;
+}
+
+.confirm-button.loading {
+  background-color: black; /* Keep black color while loading */
+}
+
 
 
 .modal {
@@ -254,7 +262,7 @@
 
 .otp-inputs {
   display: flex;
-  justify-content: center; /* Center the OTP fields horizontally */
+  justify-content: center;
   margin-bottom: 10px;
 }
 

@@ -58,7 +58,7 @@ const Navbar = () => {
               <span className="navbar-user-name">{userProfile.name}</span>
             </div>
           ) : (
-            <Link to="/" className="navbar-navlink1">
+            <Link to="/login" className="navbar-navlink1">
               <div className="navbar-sign-up-btn">
                 <span className="navbar-sign-up">Get Started</span>
               </div>

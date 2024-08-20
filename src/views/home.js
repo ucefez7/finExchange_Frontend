@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Script from "dangerous-html/react";
 import { Helmet } from "react-helmet";
@@ -16,7 +16,8 @@ import Check from "../components/check";
 import Quote from "../components/quote";
 import Footer from "../components/footer";
 import "./home.css";
-import GooglePayButton from '@google-pay/button-react'
+import GooglePayButton from '@google-pay/button-react';
+import Axios from 'axios'; // Import Axios for API calls
 
 const Home = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,21 +32,55 @@ const Home = (props) => {
   const [confirmationCode, setConfirmationCode] = useState(["", "", "", "", "", ""]);
   const [successMessage, setSuccessMessage] = useState("");
   const [status, setStatus] = useState("noExchange");
-  
+
   const [userExists, setUserExists] = useState(false);
 
-  useEffect(() => {
-    const storedUserId = localStorage.getItem('userId');
-    if (storedUserId) {
-      setUserExists(true);
+  const history = useHistory();
+
+  
+
+  const verifyUser = async () => {
+    const userId = localStorage.getItem('userId');
+    console.log("user id ethaann"+userId);
+    
+    if (!userId) {
+      console.error('No userId found in localStorage');
+      return;
     }
-    // else {
-    //   setUserExists(false);
-    // }
+  
+    try {
+      const response = await Axios.post('http://localhost:8000/verify-user', { userId });
+      if (response.data.exists) {
+        console.log('User exists');
+        setUserExists(true);
+        history.push(response.data.redirect);
+      } else {
+        console.log('User does not exist');
+        // Handle user not existing
+      }
+    } catch (error) {
+      console.error('Error verifying user:', error);
+    }
+  };
+  
+  useEffect(() => {
+    verifyUser();
   }, []);
+  
 
 
-  // Example status and color mapping
+  const handleLogin = (userId) => {
+    localStorage.setItem('userId', userId);
+    setUserExists(true);
+    history.push('/');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('userId');
+    setUserExists(false);
+    history.push('/');
+  };
+
   const statusMapping = {
     noExchange: { text: "No active Exchange", color: "#ADE2DF" },
     pending: { text: "Pending Exchange", color: "yellow" },
@@ -58,7 +93,7 @@ const Home = (props) => {
   const statusText = statusMapping[status].text;
   const statusColor = statusMapping[status].color;
 
-  const u2cSuccessRate = 85; 
+  const u2cSuccessRate = 85;
   const c2uSuccessRate = 90;
 
   const openModal = (modalType) => {
@@ -149,7 +184,7 @@ const Home = (props) => {
       return () => clearTimeout(timer);
     }
   }, [successMessage]);
-
+  
   return (
     <div className="home-container">
       <Helmet>
@@ -168,13 +203,14 @@ const Home = (props) => {
               ></Announcement>
             </Link>
           </div>
-          {userExists ? <Navbar1 /> : <Navbar />}
+          {userExists ? <Navbar1 onLogout={handleLogout} /> : <Navbar onLogout={handleLogin} />}
         </header>
 
 
 
 
-<div className="home-content" id="freeTest">
+        {userExists && (
+  <div className="home-content" id="freeTest">
   <div className="home-content-main">
     <h1 className="home-title">
     FinExchange, where cash exchanges are made simple.
@@ -195,8 +231,6 @@ const Home = (props) => {
         <span className="home-caption2">Make C2U Request</span>
       </div>
     </div>
-
-
   </div>
 
   <div className="home-content-side">
@@ -204,7 +238,7 @@ const Home = (props) => {
       <h2>Your activities</h2>
     </div>
 
-    {/* <!-- New section for success rates at the top --> */}
+    
     <div className="home-success-rates">
       <div className="success-rate">
         <div className="rate-header">
@@ -250,7 +284,7 @@ const Home = (props) => {
     </div>
   </div>
 </div>
-
+        )}
 
 
 
